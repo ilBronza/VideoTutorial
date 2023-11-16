@@ -1,0 +1,40 @@
+{
+    "name": "ilbronza/videotutorial",
+    "description": ":package_description",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Author Name",
+            "email": "author@email.com",
+            "homepage": "http://author.com"
+        }
+    ],
+    "homepage": "https://github.com/ilbronza/videotutorial",
+    "keywords": ["Laravel", "VideoTutorial"],
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~7"
+    },
+    "autoload": {
+        "psr-4": {
+            "IlBronza\\VideoTutorial\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IlBronza\\VideoTutorial\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IlBronza\\VideoTutorial\\VideoTutorialServiceProvider"
+            ],
+            "aliases": {
+                "VideoTutorial": "IlBronza\\VideoTutorial\\Facades\\VideoTutorial"
+            }
+        }
+    }
+}
