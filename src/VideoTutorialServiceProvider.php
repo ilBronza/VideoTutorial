@@ -61,6 +61,10 @@ class VideoTutorialServiceProvider extends ServiceProvider
             __DIR__.'/../config/videotutorial.php' => config_path('videotutorial.php'),
         ], 'videotutorial.config');
 
+        $this->publishes([
+            __DIR__.'/../database/migrations' => base_path('database/migrations'),
+        ], 'videotutorial.migrations');
+
         // Publishing the views.
         /*$this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/ilbronza'),
