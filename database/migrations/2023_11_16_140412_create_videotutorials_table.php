@@ -14,10 +14,29 @@ class CreateVideotutorialsTable extends Migration
      */
     public function up()
     {
-        dd(Videotutorial::make()->getTable());
         Schema::create(Videotutorial::make()->getTable(), function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+
+            $table->string('name');
+            $table->string('title')->nullable();
+            $table->string('file')->nullable();
+            $table->text('short_description')->nullable();
+            $table->text('description')->nullable();
+            $table->unsignedInteger('sorting_index')->nullable();
+
+            $table->string('link')->nullable();
+            $table->text('embed')->nullable();
+
+            $table->boolean('active')->nullable();
+            $table->boolean('show')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::table(Videotutorial::make()->getTable(), function (Blueprint $table) {
+            $table->uuid('parent_id')->after('name')->nullable();
+            $table->foreign('parent_id')->references('id')->on(Videotutorial::make()->getTable());
         });
     }
 
