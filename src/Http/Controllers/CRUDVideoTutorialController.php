@@ -61,7 +61,7 @@ class CRUDVideoTutorialController extends CRUD
 
     public function getIndexFieldsArray()
     {
-        return config('videotutorial.models.videotutorial.fieldsGroupsFiles.index')::getFieldsGroup();
+        return config('videotutorial.models.videotutorial.fieldsGroupsFiles.index')::getTracedFieldsGroup();
     }
 
     public function getGenericParametersFile() : ? string
