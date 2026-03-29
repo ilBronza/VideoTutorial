@@ -2,6 +2,7 @@
 
 namespace IlBronza\VideoTutorial;
 
+use IlBronza\VideoTutorial\Http\Middleware\VideoTutorialMiddlewareRolesPermissions;
 use Illuminate\Support\ServiceProvider;
 
 class VideoTutorialServiceProvider extends ServiceProvider
@@ -17,6 +18,8 @@ class VideoTutorialServiceProvider extends ServiceProvider
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'ilbronza');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../routes/videotutorial.php');
+
+        $this->app['router']->aliasMiddleware('videotutorial.roles', VideoTutorialMiddlewareRolesPermissions::class);
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {

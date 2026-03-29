@@ -11,6 +11,13 @@ use IlBronza\VideoTutorial\Models\Videotutorial;
 return [
     'routePrefix' => 'videotutorial',
 
+    'defaultRoles' => [
+        'administrator',
+    ],
+
+    'routeRoles' => [
+    ],
+
     'models' => [
         'videotutorial' => [
             'class' => Videotutorial::class,

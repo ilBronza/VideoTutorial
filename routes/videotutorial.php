@@ -13,7 +13,7 @@ Route::group([
 	});
 
 Route::group([
-	'middleware' => ['web', 'role:administrator'],
+	'middleware' => ['web', 'videotutorial.roles'],
 	'prefix' => 'manage-video-tutorials',
 	'as' => config('videotutorial.routePrefix')
 	],
