@@ -5,7 +5,8 @@ use IlBronza\VideoTutorial\VideoTutorial;
 Route::group([
 	'middleware' => ['web', 'auth'],
 	'prefix' => 'video-tutorials/show/',
-	'as' => config('videotutorial.routePrefix') . 'frontend.'
+	'as' => config('videotutorial.routePrefix') . 'frontend.',
+	'routeTranslationPrefix' => VideoTutorial::getRouteTranslationPrefix(),
 	],
 	function()
 	{
@@ -15,7 +16,8 @@ Route::group([
 Route::group([
 	'middleware' => ['web', 'videotutorial.roles'],
 	'prefix' => 'manage-video-tutorials',
-	'as' => config('videotutorial.routePrefix')
+	'as' => config('videotutorial.routePrefix'),
+	'routeTranslationPrefix' => VideoTutorial::getRouteTranslationPrefix(),
 	],
 	function()
 	{
