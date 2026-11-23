@@ -15,7 +15,7 @@ class VideoTutorialShowFieldsetsParameters extends FieldsetParametersFile
                     'parent' => [
                         'type' => 'select',
                         'multiple' => false,
-                        'rules' => 'string|nullable|exists:videotutorials,slug',
+                        'rules' => 'nullable|uuid',
                         'relation' => 'parent'
                     ],
 

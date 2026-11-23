@@ -2,38 +2,34 @@
 
 namespace IlBronza\VideoTutorial\Http\Controllers\Frontend;
 
+use IlBronza\VideoTutorial\Facades\VideoTutorial;
 use IlBronza\VideoTutorial\Http\Controllers\CRUDVideoTutorialController;
-use IlBronza\VideoTutorial\Models\Videotutorial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class CRUDVideoTutorialFrontendController extends CRUDVideoTutorialController
 {
     public $allowedMethods = [
         'index',
-        'show'
     ];
 
-    public $nestableElementViewName = 'crud::nestable.show.element_nestable';
+    public $nestableElementViewName = 'videotutorial::catalog-element';
 
     public function index(Request $request)
     {
-        $this->modelInstance = $modelInstance = null;
+        $this->modelInstance = null;
 
-        $elements = $this->getSortableElementsTree();
-
-        //obtain action, rootUrl and ParentUrl
-        extract($this->getSortableUrls());
-
-        $maxDepth = $this->getMaxReorderDepth();
-
-        $nestableElementViewName = $this->getNestableElementViewName();
-
-        return view('crud::nestable.show.index', compact('nestableElementViewName', 'modelInstance', 'rootUrl', 'parentUrl', 'elements', 'action', 'maxDepth'));
+        return view('crud::nestable.show.index', [
+            'nestableElementViewName' => $this->getNestableElementViewName(),
+            'modelInstance' => null,
+            'rootUrl' => null,
+            'parentUrl' => null,
+            'elements' => $this->getSortableElementsTree(),
+        ]);
     }
 
-    public function show(Videotutorial $videotutorial)
+    public function getSortableElements($modelInstance): Collection
     {
-        return $this->_show($videotutorial);
+        return VideoTutorial::getSortableElements($modelInstance);
     }
 }
-

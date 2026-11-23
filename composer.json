@@ -14,6 +14,20 @@
     "require": {
     },
     "require-dev": {
+        "ilbronza/accountmanager": "^2.5.1",
+        "ilbronza/buttons": "^2.5.1",
+        "ilbronza/crud": "^2.5.1",
+        "ilbronza/datatables": "^2.5.1",
+        "ilbronza/form": "^2.5.1",
+        "ilbronza/formfield": "^2.5.1",
+        "ilbronza/menu": "^2.5.1",
+        "ilbronza/uikittemplate": "^2.5.1",
+        "ilbronza/ukn": "^2.5.1",
+        "orchestra/testbench": "^9.0 || ^10.0",
+        "phpunit/phpunit": "^11.5",
+        "spatie/laravel-activitylog": "^4.0",
+        "spatie/laravel-medialibrary": "^11.0",
+        "spatie/laravel-permission": "^6.0"
     },
     "autoload": {
         "psr-4": {
@@ -22,8 +36,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "IlBronza\\VideoTutorial\\Tests\\": "tests"
+            "IlBronza\\VideoTutorial\\Tests\\": "tests/",
+            "App\\": "tests/Fixtures/App/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "extra": {
         "laravel": {

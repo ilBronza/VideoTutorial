@@ -17,6 +17,16 @@ composer require ilbronza/videotutorial
 
 ## Usage
 
+Run `php artisan migrate` to add route associations. In the video tutorial form, use **Associated routes** to select one or more named Laravel GET routes. For example, associating a guide with `orders.show` makes it available for every order detail page on that route.
+
+In authenticated pages using the standard UIKit layout, a question-mark icon opens the guides for the current route. The panel includes active, visible tutorials with an uploaded video, an iframe embed, or a video link.
+
+The catalog is available to signed-in users at `/video-tutorials/show`. A tutorial appears there when both **Active** and **Visible** are enabled. Published tutorials with a hidden parent appear at the top level. Administrators can open drafts and manage the hierarchy at `/manage-video-tutorials`.
+
+The migration creates the web role `videoTutrialMaker`. Users assigned to this role can choose **Upload a video for this page** from the AccountManager profile menu. The upload creates a draft for the current named GET route and opens its edit form. The author can fill in the title and descriptions and enable **Active** and **Visible** to publish the guide.
+
+If AccountManager route authorization is enabled, assign the role to the contextual upload and edit routes in its access catalog.
+
 ## Change log
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.

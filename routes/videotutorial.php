@@ -1,6 +1,36 @@
 <?php
 
+use IlBronza\VideoTutorial\Http\Controllers\CRUDVideoTutorialController;
+use IlBronza\VideoTutorial\Http\Controllers\CRUDVideoTutorialIndexController;
+use IlBronza\VideoTutorial\Http\Controllers\ContextualUpload\VideoTutorialMakerEditController;
+use IlBronza\VideoTutorial\Http\Controllers\ContextualUpload\VideoTutorialUploadController;
+use IlBronza\VideoTutorial\Http\Controllers\Frontend\VideoTutorialReaderShowController;
 use IlBronza\VideoTutorial\VideoTutorial;
+use Spatie\Permission\Middleware\RoleMiddleware;
+
+Route::group([
+	'middleware' => [
+		'web',
+		'auth',
+		RoleMiddleware::class . ':' . VideoTutorial::MAKER_ROLE . ',web',
+	],
+	'prefix' => 'video-tutorials/contextual',
+	'as' => config('videotutorial.routePrefix') . 'contextualUpload.',
+	'routeTranslationPrefix' => VideoTutorial::getRouteTranslationPrefix(),
+], function () {
+	Route::post('', [
+		VideoTutorialUploadController::class,
+		'store',
+	])->middleware('signed')->name('store');
+	Route::get('{videotutorial}/edit', [
+		VideoTutorialMakerEditController::class,
+		'edit',
+	])->name('edit');
+	Route::put('{videotutorial}', [
+		VideoTutorialMakerEditController::class,
+		'update',
+	])->name('update');
+});
 
 Route::group([
 	'middleware' => ['web', 'auth'],
@@ -10,7 +40,14 @@ Route::group([
 	],
 	function()
 	{
-		Route::get('', [VideoTutorial::getController('videotutorial', 'frontend'), 'index'])->name('videotutorials.index');		
+		Route::get('', [
+			VideoTutorial::getController('videotutorial', 'frontend'),
+			'index',
+		])->name('videotutorials.index');
+		Route::get('{videotutorial}', [
+			VideoTutorialReaderShowController::class,
+			'show',
+		])->name('videotutorials.show');
 	});
 
 Route::group([
@@ -29,7 +66,15 @@ Route::group([
 
 
 
-		Route::get('', [VideoTutorial::getController('videotutorial', 'index'), 'index'])->name('videotutorials.index');
+		$indexController = VideoTutorial::getController('videotutorial', 'index');
+		if ($indexController === CRUDVideoTutorialController::class) {
+			$indexController = CRUDVideoTutorialIndexController::class;
+		}
+
+		Route::get('', [
+			$indexController,
+			'index',
+		])->name('videotutorials.index');
 		Route::get('create', [VideoTutorial::getController('videotutorial', 'create'), 'create'])->name('videotutorials.create');
 		Route::post('', [VideoTutorial::getController('videotutorial', 'store'), 'store'])->name('videotutorials.store');
 

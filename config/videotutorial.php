@@ -1,6 +1,7 @@
 <?php
 
 use IlBronza\VideoTutorial\Http\Controllers\CRUDVideoTutorialController;
+use IlBronza\VideoTutorial\Http\Controllers\CRUDVideoTutorialIndexController;
 use IlBronza\VideoTutorial\Http\Controllers\Frontend\CRUDVideoTutorialFrontendController;
 use IlBronza\VideoTutorial\Http\Controllers\Frontend\CRUDVideoTutorialFrontendShowController;
 use IlBronza\VideoTutorial\Http\Parameters\FieldsetsParameters\VideoTutorialCreateFieldsetsParameters;
@@ -31,7 +32,7 @@ return [
             ],
             'controllers' => [
                 'frontend' => CRUDVideoTutorialFrontendController::class,
-                'index' => CRUDVideoTutorialController::class,
+                'index' => CRUDVideoTutorialIndexController::class,
                 'create' => CRUDVideoTutorialController::class,
                 'store' => CRUDVideoTutorialController::class,
                 'show' => CRUDVideoTutorialFrontendShowController::class,

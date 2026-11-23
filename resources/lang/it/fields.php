@@ -14,4 +14,5 @@ return [
 	'embed' => 'Codice incorporazione',
 	'active' => 'Attivo',
 	'show' => 'Visibile',
+	'route_names' => 'Route associate',
 ];
